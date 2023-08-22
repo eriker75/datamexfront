@@ -1,0 +1,17 @@
+/*
+ * Around | Multipurpose Bootstrap Template
+ * Copyright 2021 Createx Studio
+ * Theme styles
+ */
+
+// Configuration & utilities
+@use 'variables' as *;
+@import 'mixins';
+@import 'utilities';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Layout & components
+@import 'reboot';
+@import 'components';
