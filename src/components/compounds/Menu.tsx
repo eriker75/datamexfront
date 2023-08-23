@@ -1,4 +1,4 @@
-import { NAVIGATION_MENU } from "@/constants/navigation";
+import { NAVIGATION_MENU } from "@/models/constants/navigation";
 import Navigation from "@/components/blocks/Navigation";
 
 export const Menu = () => {

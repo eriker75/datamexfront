@@ -1,13 +1,16 @@
 import { Hero, Footer, SignInModal } from "@/components";
-import { ChildrenInterface } from "@/interfaces/ChildrenInterface";
+import { ChildrenInterface } from "@/models/interfaces/ChildrenInterface";
+import { ProtectedLayout } from "./ProtectedLayout";
 
 export const MainLayout = ({children}: ChildrenInterface) => {
   return (
     <main>
-      <SignInModal/>
-      <Hero/>
-      {children}
-      <Footer/>
+      <ProtectedLayout>
+        <SignInModal/>
+        <Hero/>
+        {children}
+        <Footer/>
+      </ProtectedLayout>
     </main>
   )
 }

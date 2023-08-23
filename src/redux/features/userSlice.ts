@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { UserModel } from "@/models/UserModel";
+import { UserModel } from "@/models/entities/UserModel";
 import { Nullable } from "@/types";
 
 export const initialUserState: Nullable<UserModel> = {

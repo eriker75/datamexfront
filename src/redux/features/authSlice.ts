@@ -1,16 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import jsCookie from 'js-cookie';
 
 export interface AuthState {
     isLoggedIn: boolean;
-    authToken: string | null;
-    refreshToken: string | null;
+    authToken: string | undefined | null;
+    refreshToken: string | undefined | null;
 }
   
 export const initialAuthState: AuthState = { 
-    isLoggedIn: false,
-    authToken: localStorage.getItem('authToken'),
-    refreshToken: localStorage.getItem('refreshToken'),
+    isLoggedIn: Boolean(jsCookie.get('isLoggedIn')),
+    authToken: jsCookie.get('authToken'),
+    refreshToken: jsCookie.get('refreshToken'),
 }
 
 export interface TokenPayload {
@@ -26,13 +27,22 @@ const authSlice = createSlice({
             state.isLoggedIn = true;
             state.authToken = action.payload.authToken;
             state.refreshToken = action.payload.refreshToken;
+            jsCookie.set('authToken', action.payload.authToken);
+            jsCookie.set('refreshToken', action.payload.refreshToken);
+            jsCookie.set('isLoggedIn', "true");
+            console.log("login")
         },
         logout(state) {
             state = initialAuthState;
+            jsCookie.remove('authToken');
+            jsCookie.remove('refreshToken');
+            jsCookie.remove('isLoggedIn');
         },
         refresh(state, action: PayloadAction<TokenPayload>) {
             state.authToken = action.payload.authToken;
             state.refreshToken = action.payload.refreshToken;
+            jsCookie.set('authToken', action.payload.authToken);
+            jsCookie.set('refreshToken', action.payload.refreshToken);
         }
     },
 })

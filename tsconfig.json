@@ -17,11 +17,11 @@
     "paths": {
       "@/*": ["./*"],
       "@/components": ["./components"],
-      "@/styles": ["./styles"],
+      "@/assets": ["./assets"],
+      "@/context": ["./context"],
+      "@/helpers": ["./helpers"],
+      "@/models": ["./models"],
       "@/redux": ["./redux"],
-      "@/interfaces": ["./interfaces"],
-      "@/constants": ["./constants"],
-      "@/types": ["./types"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

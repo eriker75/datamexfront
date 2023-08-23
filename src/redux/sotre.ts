@@ -1,12 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query/react";
-import { AuthSliceReducer, UserSliceReducer } from "./features";
+import { AuthSliceReducer, FilterSliceReducer/* , UserSliceReducer */ } from "./features";
 
 const store = configureStore({
     devTools:true,
     reducer: {
         auth: AuthSliceReducer,
-        user: UserSliceReducer,
+        filters: FilterSliceReducer,
+        //user: UserSliceReducer,
         /* [orderApi.reducerPath]: orderApi.reducer,
         [authApi.reducerPath] : authApi.reducer,
         [totalsCounterApi.reducerPath]: totalsCounterApi.reducer */

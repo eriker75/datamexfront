@@ -1,4 +1,4 @@
-import { NavigationCI } from "@/interfaces/components/blocks/Navigation";
+import { NavigationCI } from "@/models/interfaces/Navigation";
 import { NavItem } from "@/components/elements/NavItem";
 
 export const Navigation = ({ NavItems }: NavigationCI) => {
