@@ -12,22 +12,11 @@ export const ProtectedLayout = ({children}: ChildrenInterface) => {
   const { isLoggedIn } = useAppSelector((state: RootState) => state.auth )
   
   useEffect(()=> {
-
-    const authToken = jsCookie.get('authToken');
-    const refreshToken = jsCookie.get('refreshToken');
-
-    if(authToken === "token" && refreshToken === "refresh") {
-      dispatch(login({
-        refreshToken,
-        authToken,
-      }))
-    }
-
     if(!isLoggedIn) {
       router.push('/login');
     }
     return;
-  }, [])
+  }, [isLoggedIn, router, dispatch])
 
   return (
     <div>

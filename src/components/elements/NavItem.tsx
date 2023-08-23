@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { NavItemCI } from "@/interfaces/components/elements/NavItem";
 import styles from './NavItem.module.scss';
 import classNames from 'classnames/bind';
+import { NavItemCI } from "@/models/interfaces/NavItem";
 
 let cx = classNames.bind(styles);
 

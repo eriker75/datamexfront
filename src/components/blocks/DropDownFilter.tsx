@@ -1,6 +1,7 @@
 import { DropDownItem } from "@/components/elements/DropDownItem";
-
+import { useAppSelector } from "@/hooks/redux";
 import { FilterType } from "@/models/types/FilterType";
+import { memo, useMemo, useState } from "react";
 
 export interface DropDownFilterCI {
   placeholder: string;
@@ -8,8 +9,18 @@ export interface DropDownFilterCI {
   filters: string[];
 }
 
-export const DropDownFilter = ({ placeholder, type, filters }: DropDownFilterCI) => {
-  
+const DropDownFilter = memo(({ placeholder, type, filters }: DropDownFilterCI) => {
+
+  const filterState = useAppSelector((state) => state.filters);
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredFilters = useMemo(() => {
+    return filters.filter((filter) => {
+      return filter.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+  }, [searchTerm, filters]);
+
   return (
     <div className="btn-group dropdown">
       <div
@@ -23,6 +34,7 @@ export const DropDownFilter = ({ placeholder, type, filters }: DropDownFilterCI)
           placeholder={placeholder}
           className="rounded"
           style={{ outline: "none", border: "none" }}
+          onChange={(event) => setSearchTerm(event.target.value)}
         />
       </div>
       <div
@@ -34,12 +46,16 @@ export const DropDownFilter = ({ placeholder, type, filters }: DropDownFilterCI)
           <div
             key={filter}
             style={{ padding: "0 1.25rem" }}
-            className="dropdown-item"
+            className={filteredFilters.includes(filter) ? "dropdown-item" : "dropdown-item d-none"}
           >
-            <DropDownItem filter={filter} type={type}/>
+            <DropDownItem filter={filter} type={type} status={filterState[type].includes(filter)}/>
           </div>
         )}
       </div>
     </div>
   );
-};
+});
+
+DropDownFilter.displayName = 'DropDownFilter';
+
+export { DropDownFilter };

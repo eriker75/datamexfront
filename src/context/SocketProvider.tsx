@@ -1,5 +1,5 @@
 import { useSocket } from "@/hooks/useSocket";
-import { ChildrenInterface } from "@/interfaces/ChildrenInterface";
+import { ChildrenInterface } from "@/models/interfaces/ChildrenInterface";
 import { createContext, useEffect, useState } from "react"
 import { Socket } from "socket.io-client";
 

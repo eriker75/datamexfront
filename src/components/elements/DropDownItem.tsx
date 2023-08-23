@@ -1,33 +1,34 @@
 import { useAppDispatch } from "@/hooks/redux";
 import { FilterType } from "@/models/types/FilterType";
 import { toggleFilter } from "@/redux/features/filterSlice";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import jsCookie from 'js-cookie';
 export interface DropDownItemCI {
   filter: string;
   type: FilterType;
+  status: boolean;
 }
 
-export const DropDownItem = ({ filter, type }: DropDownItemCI) => {
-  const [ checked, setChecked ] = useState<boolean>(false);
-  const dispatch = useAppDispatch()
+const DropDownItem = memo(({ filter, type, status }: DropDownItemCI) => {
+  const [ checked, setChecked ] = useState<boolean>(status);
+  const dispatch = useAppDispatch();
+  const checkboxRef = useRef<HTMLInputElement>(null);
 
-  const handleDropdownClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.preventDefault()
+  const handleInputCheckClick = () => {
     dispatch(toggleFilter({ type, filter }));
     setChecked(!checked)
-  };
+  }
 
-  useEffect(() => {
-    const savedState = jsCookie.get('filterState');
-    if (savedState) {
-      const parsedState = JSON.parse(savedState);
-      setChecked(parsedState[type].includes(filter));
+  const handleLabelCheckClick = (event: any) => {
+    dispatch(toggleFilter({ type, filter }));
+    event.preventDefault();
+    if(checkboxRef.current) {
+      checkboxRef.current.checked = !checkboxRef.current.checked;
     }
-  }, [type, filter]);
-
+    setChecked(!checked)
+  }
   return (
-    <div className="form-check" onClick={handleDropdownClick}>
+    <div className="form-check">
       <input
         className="form-check-input cursor"
         type="checkbox"
@@ -35,14 +36,21 @@ export const DropDownItem = ({ filter, type }: DropDownItemCI) => {
         name={filter}
         value={filter}
         defaultChecked={checked}
+        onClick={() => handleInputCheckClick()}
+        ref={checkboxRef}
       />
       <label
         className="form-check-label cursor w-100"
-        //htmlFor={filter}
+        htmlFor={filter}
         style={{ whiteSpace: "normal" }}
+        onClick={(event) => handleLabelCheckClick(event)}
       >
         {filter}
       </label>
     </div>
   )
-}
+})
+
+DropDownItem.displayName = 'DropDownItem';
+
+export { DropDownItem };

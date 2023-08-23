@@ -11,7 +11,6 @@ export default function Home() {
   useEffect(() => {
     socket?.on('hola', (payload: string) => {
       setMessage(payload)
-      console.log(payload)
     })
   }, [socket])
 

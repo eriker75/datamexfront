@@ -30,7 +30,6 @@ const authSlice = createSlice({
             jsCookie.set('authToken', action.payload.authToken);
             jsCookie.set('refreshToken', action.payload.refreshToken);
             jsCookie.set('isLoggedIn', "true");
-            console.log("login")
         },
         logout(state) {
             state = initialAuthState;

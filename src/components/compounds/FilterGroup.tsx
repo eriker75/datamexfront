@@ -9,7 +9,7 @@ export const FilterGroup = () => {
         <Col className="d-flex justify-content-center">
           <DropDownFilter placeholder={"Giros de negocio"} type={'cities'} filters={CITIES}/>
         </Col>
-        <Col className="d-flex justify-content-center">
+        {/* <Col className="d-flex justify-content-center">
           <DropDownFilter placeholder={"Giros de negocio"} type={'states'} filters={CITIES}/>
         </Col>
         <Col className="d-flex justify-content-center">
@@ -17,7 +17,7 @@ export const FilterGroup = () => {
         </Col>
         <Col className="d-flex justify-content-center">
           <DropDownFilter placeholder={"Giros de negocio"} type={'sizes'} filters={CITIES}/>
-        </Col>
+        </Col> */}
       </Row>
     </Container>
   );
